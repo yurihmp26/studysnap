@@ -822,6 +822,9 @@
 </div>
 
 <script>
+// ─── Config ──────────────────────────────────────────────
+const API_URL = 'https://studysnap.yurihmp.workers.dev'; // <- substitua pela URL do seu Cloudflare Worker
+
 // ─── State ───────────────────────────────────────────────
 let images = [];     // { dataUrl, file }
 let format = 'mixed';
@@ -947,11 +950,10 @@ Regras:
 - Base as questões APENAS no conteúdo das imagens`;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
@@ -1124,11 +1126,10 @@ async function submitEssay(idx) {
   document.getElementById(`essay-${idx}`).disabled = true;
 
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch(API_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
